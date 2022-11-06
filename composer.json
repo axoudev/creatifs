@@ -1,0 +1,17 @@
+{
+    "name": "axel/public",
+    "autoload": {
+        "psr-4": {
+            "App\\Controllers\\": "app/controllers",
+            "App\\Models\\": "app/models",
+            "Core\\Classes\\": "core/classes"
+        }
+    },
+    "authors": [
+        {
+            "name": "Axeldev",
+            "email": "axl.bertrand.webdev@gmail.com"
+        }
+    ],
+    "require": {}
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>CREA'TIFs - Design capill'Hair</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-post.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">CREA'TIFs - Design capill'Hair</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Les Projets</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <!-- Post Content Column -->
+        <div class="col-lg-8 py-5">
+          <!-- Title -->
+          <h1>Add a project</h1>
+
+          <!-- Form Start -->
+          <form action="">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                class="form-control"
+                placeholder="Enter your title here"
+              />
+            </div>
+            <div class="form-group">
+              <label for="text">Text</label>
+              <textarea
+                id="text"
+                name="text"
+                class="form-control"
+                rows="5"
+                placeholder="Enter your text here"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlFile1"> Image</label>
+              <input
+                type="file"
+                class="form-control-file btn btn-primary"
+                id="exampleFormControlFile1"
+              />
+            </div>
+            <div class="form-group">
+              <label for="text">Creatif</label>
+              <select id="category" name="category_id" class="form-control">
+                <option disabled selected>Select your creatif</option>
+                <option value="1">Leerdam' Hair</option>
+                <option value="2">Administra'Tifs</option>
+              </select>
+            </div>
+            <div>
+              <input class="btn btn-primary" type="submit" value="submit" />
+              <input class="btn btn-secondary" type="reset" value="reset" />
+            </div>
+          </form>
+          <!-- Form End -->
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+          <!-- Search Widget -->
+          <div class="card my-4 d-none">
+            <h5 class="card-header">Search</h5>
+            <div class="card-body">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Your search"
+                />
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button">Go!</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Creatifs Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Crea'tifs</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li><a href="#">Mister Univ'Hair [4]</a></li>
+                    <li><a href="#">Leerdam'Hair [12]</a></li>
+                    <li><a href="#">Administra'Tifs [8]</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tags Widget -->
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">
+          Copyright &copy; IEPS 2022 | <a href="login.html">Administration</a>
+        </p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

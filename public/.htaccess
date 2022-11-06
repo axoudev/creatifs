@@ -1,0 +1,44 @@
+#--------------------------------------------------
+# Répertoire : /
+#--------------------------------------------------
+
+# Le serveur doit suivre les liens symboliques :
+Options +FollowSymlinks
+
+# Activation du module de réécriture d'URL :
+RewriteEngine on
+
+
+#-----------------------------------
+# ROUTES
+#-----------------------------------
+
+#ROUTE DES PAGES
+    #PATTERN: page/id
+    #URL: ?page=xx
+    RewriteRule ^page\/([1-9][0-9]*)$ index.php?page=$1 [L]
+
+#ROUTE DES PROJETS
+
+    #AFFICHER LES DETAILS D'UN PROJET
+    #PATTERN: project/id/slug
+    #URL: ?project=xx
+    RewriteRule ^project\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*$ index.php?project=$1 [L]
+
+    #SUPPRIMER UN PROJET
+    #PATTERN: project/delete/id/slug
+    #URL: ?project=delete&id=xx
+    RewriteRule ^project\/delete\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*$ index.php?project=delete&id=$1 [L]
+
+    #AJOUTER UN PROJET (formulaire)
+    #PATTERN: project/add/form
+    #URL: ?project=add
+    RewriteRule ^project\/add\/form$ index.php?project=add [L]
+
+    #AJOUTER UN PROJET (insertion)
+    #PATTERN: project/add/insert
+    #URL: ?project=insert
+    RewriteRule ^project\/add\/insert$ index.php?project=insert [L]
+
+#-----------------------------------
+RewriteCond %{REQUEST_URI} !\.(js|css|jpg|gif|zip|png|pdf)$ [NC]
