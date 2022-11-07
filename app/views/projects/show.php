@@ -11,7 +11,7 @@
 </p>
 
 <div>
-    <a href="#" class="btn btn-primary">Éditer le projet</a>
+    <a href="project/<?=$project->getId()?>/<?=Helpers::slugify($project->getTitle())?>/edit/form" class="btn btn-primary">Éditer le projet</a>
     <a href="project/delete/<?=$project->getId()?>/<?=\Core\Classes\Helpers::slugify($project->getTitle())?>" class="btn">Supprimer le projet</a>
 </div>
 <hr />

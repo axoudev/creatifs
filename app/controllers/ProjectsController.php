@@ -93,39 +93,74 @@ abstract class ProjectsController
      */
     public static function insertAction(array $data, array $image) :void
     {
+        //vérifie que l'image existe
         if (!empty($image)){
-
-            $fileExtension = explode('.', $image['name']);
-
-            if(in_array($image['type'], App::getAuthorizedImagesType()))
-            {
-                //vérifie la faille de double extension (par exemple, "image.php.png") et vérifie que l'extension est autorisée
-                if(count($fileExtension)<=2 && in_array(strtolower(end($fileExtension)), App::getAuthorizedImagesExtension()))
+            //crée un nom pour l'image avec un id unique
+            $newImgName = uniqid().'.'.strtolower(end(explode('.', $image['name'])));
+            //vérifie que l'image est valide
+            if(\Core\Classes\Helpers::isValidImage($image)){
+                //vérifie qu'il n'y à pas eu d'erreur lors de l'upload
+                if(move_uploaded_file($image['tmp_name'], '../public/assets/images/'.$newImgName))
                 {
-                    //vérifie que la taille ne dépasse pas la taille maximale et qu'il n'y à pas d'erreur
-                    if($image['size'] <= App::getMaxImageSize() && !$image['error'])
-                    {
-                        $newImgName = uniqid().'.'.\strtolower(end($fileExtension));
-                        //vérifie qu'il n'y à pas eu d'erreur lors de l'upload
-                        if(move_uploaded_file($image['tmp_name'], '../public/assets/images/'.$newImgName))
-                        {
-                            //Tout s'est bien passé au niveau de l'image -> on insère les data dans la DB
-                            $executed = ProjectsRepository::addOne($data, $newImgName);
-                            header('Location:'.App::getPublic_root());
+                    //Tout s'est bien passé au niveau de l'image -> on insère les data dans la DB
+                    ProjectsRepository::addOne($data, $newImgName);
+                    header('Location:'.App::getPublic_root());
 
-                        }
-                        else{
-                            echo 'Erreur lors de l\'upload...';
-                        }
-                    }
-                    else{
-                        echo 'Taille du fichier trop grande ...';
-                    } 
                 }
                 else{
-                    echo 'Type de fichier non autorisé';
+                    echo 'Erreur lors de l\'upload...';
                 }
             }
+            
         }
+    }
+
+    public static function editAction(int $id) :void
+    {
+        $project = ProjectsRepository::findOneById($id); 
+        $projectCreatif = CreatifsRepository::findOneByProjectId($id);
+        $creatifs = CreatifsRepository::findAll();
+
+        global $content;
+        ob_start();
+        include '../app/views/projects/editForm.php';
+        $content = ob_get_clean();
+    }
+
+    public static function updateAction(int $id, array $data, array $image) :variant_mod
+    {
+        //ancienne image
+        $Oldimage = ProjectsRepository::findOneById($id)->getImage();
+
+        var_dump($image['name']);
+        //vérifie que l'image existe
+        if (!empty($image) && $image['size'] > 0){
+            //crée un nom pour l'image avec un id unique
+            $tmp = explode('.', $image['name']);
+            $newImgName = uniqid().'.'.strtolower(end($tmp));
+            //vérifie que l'image est valide
+            if(\Core\Classes\Helpers::isValidImage($image)){
+                //vérifie qu'il n'y à pas eu d'erreur lors de l'upload
+                if(move_uploaded_file($image['tmp_name'], '../public/assets/images/'.$newImgName))
+                {
+                    //Supprime l'ancienne image du projet
+                    if(file_exists('../public/assets/images/'.$Oldimage))
+                    {
+                        unlink('../public/assets/images/'.$Oldimage); 
+                    }
+
+                    //Tout s'est bien passé au niveau de l'image -> on insère les data dans la DB
+                    ProjectsRepository::editOne($id, $data, $newImgName);
+                }
+                else{
+                    echo 'Erreur lors de l\'upload...';
+                }
+            }
+            
+        }else{
+            //Pas de nouvelle image -> on reprend l'ancienne
+            ProjectsRepository::editOne($id, $data, $Oldimage);
+        }
+        header('Location:'.App::getPublic_root());
     }
 }

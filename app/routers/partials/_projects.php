@@ -19,7 +19,12 @@ switch($_GET['project']){
 
     //Formulaire de modification
     case 'edit':
-        ProjectsController::editAction();
+        ProjectsController::editAction((int)$_GET['id']);
+        break;
+
+    //Modifier un post
+    case 'update':
+        ProjectsController::updateAction((int)$_GET['id'], $_POST, $_FILES['image']);
         break;
 
     //Afficher les projets
