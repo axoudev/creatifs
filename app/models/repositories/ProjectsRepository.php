@@ -124,8 +124,31 @@ abstract class ProjectsRepository
         return $executed;
     }
 
-    public static function addOne(array $data, array $image){
+    /**
+     * Ajoute un projet à la DB
+     *
+     * @param array $data les champs du projet
+     * @param string $imageName le nom de l'image
+     * @return void
+     */
+    public static function addOne(array $data, string $imageName){
+        try{
+            $sql = "INSERT INTO projets
+                    SET titre = :titre,
+                        texte = :texte,
+                        image = :image,
+                        creatif = :creatif;";
+            $rs = App::getConnexion()->prepare($sql);
+            $rs->bindValue(":titre", $data['title'], PDO::PARAM_STR);
+            $rs->bindValue(":texte", $data['text'], PDO::PARAM_STR);
+            $rs->bindValue(":image", $imageName, PDO::PARAM_STR);
+            $rs->bindValue(":creatif", (int)$data['creatif_id'], PDO::PARAM_INT);
+            $executed = $rs->execute();
+        }catch(PDOException $e){
+            $message .= $e->getMessage()."<br>";
+        }
         
+        return $executed;
     }
 }
 ?>

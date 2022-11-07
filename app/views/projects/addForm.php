@@ -29,14 +29,16 @@
       type="file"
       class="form-control-file btn btn-primary"
       id="exampleFormControlFile1"
+      name="image"
     />
   </div>
   <div class="form-group">
     <label for="text">Creatif</label>
-    <select id="category" name="category_id" class="form-control">
+    <select id="creatif" name="creatif_id" class="form-control">
       <option disabled selected>Select your creatif</option>
-      <option value="1">Leerdam' Hair</option>
-      <option value="2">Administra'Tifs</option>
+      <?php foreach($creatifs as $creatif): ?>
+        <option value=<?=$creatif->getId()?>><?=$creatif->getPseudo()?></option>
+      <?php endforeach ?>
     </select>
   </div>
   <div>

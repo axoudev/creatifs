@@ -50,6 +50,15 @@ abstract class ProjectsController
      */
     public static function deleteAction(int $id) :void
     {
+        $image = ProjectsRepository::findOneById($id)->getImage();
+
+        //Supprime l'image du projet
+        if(file_exists('../public/assets/images/'.$image))
+        {
+            unlink('../public/assets/images/'.$image); 
+        }
+
+        //Supprime le projet
         if(ProjectsRepository::deleteOneById($id)){
             header('Location:'.\Core\Classes\App::getPublic_root());
         }else{
@@ -83,37 +92,43 @@ abstract class ProjectsController
     public static function insertAction(array $data, array $image) :void
     {
         if (!empty($image)){
-            $fileName = $image['name'];
-            $fileType = $image['type'];
-            $fileSize = $image['size'];
-            $fileTemp = $image['tmp_name'];
-            $fileError = $image['error'];
 
-            $AuthorizedExtensions = ['png', 'jpg', 'jpeg', 'gif'];
-            $AuthorizedTypes = ['image/png','image/jpg','image/jpeg','image/gif'];
+            // $AuthorizedExtensions = ['png', 'jpg', 'jpeg', 'gif'];
+            // $AuthorizedTypes = ['image/png','image/jpg','image/jpeg','image/gif'];
 
             $fileExtension = explode('.', $image['name']);
 
             $maxSize = 10000000;
 
-            if(in_array($image['type'], $AuthorizedTypes))
+            if(in_array($image['type'], \Core\Classes\App::getAuthorizedImagesType()))
             {
-                //faille double extension
-                if(count($fileExtension)<=2)
+                //vérifie la faille de double extension (par exemple, "image.php.png") et vérifie que l'extension est autorisée
+                if(count($fileExtension)<=2 && in_array(strtolower(end($fileExtension)), \Core\Classes\App::getAuthorizedImagesExtension()))
                 {
-                    //verifie si l'extension est bien dans les extensions autorisées
-                    if(in_array(strtolower(end($fileExtension)), $AuthorizedExtensions))
+                    //vérifie que la taille ne dépasse pas la taille maximale et qu'il n'y à pas d'erreur
+                    if($image['size'] <= $maxSize && !$image['error'])
                     {
-                        //vérifie que la taille ne dépasse pas la taille maximale
-                        if($image['size'] <= $maxSize)
+                        $newImgName = uniqid().'.'.\strtolower(end($fileExtension));
+                        //vérifie qu'il n'y à pas eu d'erreur lors de l'upload
+                        if(move_uploaded_file($image['tmp_name'], '../public/assets/images/'.$newImgName))
                         {
+                            //Tout s'est bien passé au niveau de l'image -> on insère les data dans la DB
+                            $executed = ProjectsRepository::addOne($data, $newImgName);
+                            header('Location:'.\Core\Classes\App::getPublic_root());
 
                         }
+                        else{
+                            echo 'Erreur lors de l\'upload...';
+                        }
                     }
+                    else{
+                        echo 'Taille du fichier trop grande ...';
+                    } 
+                }
+                else{
+                    echo 'Type de fichier non autorisé';
                 }
             }
         }
-        ProjectsRepository::addOne($data, $image);
-        header('Location:'.\Core\Classes\App::getPublic_root());
     }
 }

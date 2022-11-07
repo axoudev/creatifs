@@ -9,7 +9,7 @@ switch($_GET['project']){
         ProjectsController::addAction();
         break;
     case 'insert':
-        ProjectsController::insertAction($_POST, $_FILES);
+        ProjectsController::insertAction($_POST, $_FILES['image']);
     default:
         ProjectsController::showAction((int)$_GET['project']);
 }
