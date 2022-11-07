@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
-
-class Creatif{
+class Creatif implements ClassTemplate{
     private $id, $pseudo, $bio, $image;
 
     //-------------------------------

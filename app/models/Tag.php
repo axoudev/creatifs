@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class Tag{
+class Tag implements ClassTemplate{
     private $id, $nom;
 
 

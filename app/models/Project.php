@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Project{
+class Project implements ClassTemplate{
     private $id, $titre, $texte, $dateCreation, $image, $creatif;
 
     //-------------------------------
