@@ -36,6 +36,7 @@
     <label for="text">Creatif</label>
     <select id="creatif" name="creatif_id" class="form-control">
       <option disabled selected>Select your creatif</option>
+      <!-- Affiche les créatifs existants dans la liste déroulante -->
       <?php foreach($creatifs as $creatif): ?>
         <option value=<?=$creatif->getId()?>><?=$creatif->getPseudo()?></option>
       <?php endforeach ?>

@@ -131,7 +131,7 @@ abstract class ProjectsRepository
      * @param string $imageName le nom de l'image
      * @return void
      */
-    public static function addOne(array $data, string $imageName){
+    public static function addOne(array $data, string $imageName, &$message = 'ProjectsRepository->addOne: '){
         try{
             $sql = "INSERT INTO projets
                     SET titre = :titre,
@@ -151,7 +151,15 @@ abstract class ProjectsRepository
         return $executed;
     }
 
-    public static function editOne(int $id, array $data, string $imageName){
+    /**
+     * Modifie un projet dans la DB
+     *
+     * @param integer $id ID du projet modifé
+     * @param array $data Nouvelles données du projet
+     * @param string $imageName Nouvelle image du projet
+     * @return void
+     */
+    public static function editOne(int $id, array $data, string $imageName, &$message = 'ProjectsRepository->editOne: '){
         try{
             $sql = "UPDATE projets
                     SET titre = :titre,

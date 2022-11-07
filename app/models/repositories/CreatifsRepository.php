@@ -55,7 +55,14 @@ abstract class CreatifsRepository
         return $obj;
     }
 
-    public static function findNbProjects(int $id, &$message = 'CreatifsRepository->findOneById: ')
+    /**
+     * Compre le nombre de projets liées au creatif
+     *
+     * @param integer $id ID du creatif
+     * @param string $message 
+     * @return void
+     */
+    public static function findNbProjects(int $id, &$message = 'CreatifsRepository->findNbProjects: ')
     {
         try{
             $sql = "SELECT count(p.id) 
@@ -73,7 +80,14 @@ abstract class CreatifsRepository
         return $nb_projects;
     }
     
-    public static function findOneByProjectId(int $id, &$message = 'CreatifsRepository->findOneById: ')
+    /**
+     * Trouver un créatif lié à un projet donné
+     *
+     * @param integer $id ID du projet dont on veut trouver le créatif
+     * @param string $message
+     * @return void
+     */
+    public static function findOneByProjectId(int $id, &$message = 'CreatifsRepository->findOneByProjectId: ')
     {
         try{
             $sql = "SELECT c.* 

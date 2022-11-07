@@ -14,7 +14,7 @@ abstract class TagsRepository
      * @param string $message
      * @return Tag[] $obj Tableau d'objets Tag
      */
-    public static function findAllByPost(int $postId, &$message = 'CreatifsRepository->findOneById: ')
+    public static function findAllByPost(int $postId, &$message = 'TagsRepository->findAllByPost: ')
     {
         try{
             $sql = "SELECT t.* 

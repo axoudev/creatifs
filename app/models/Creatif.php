@@ -48,6 +48,11 @@ class Creatif{
         return $this->image;
     }
 
+    /**
+     * Retourne le nombre de projets liés au créatif
+     *
+     * @return integer
+     */
     public function getNbProjects(): int
     {
         return \App\Models\Repositories\CreatifsRepository::findNbProjects($this->id);

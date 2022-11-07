@@ -36,6 +36,7 @@
   <div class="form-group">
     <label for="text">Creatif</label>
     <select id="creatif" name="creatif_id" class="form-control">
+      <!-- Affiche les creatifs existans dans la liste déroulante et selectione celui qui correspond aux projet -->
       <?php foreach($creatifs as $creatif): ?>
         <option value=<?=$creatif->getId()?> <?php if($creatif->getId() == $projectCreatif->getId()) echo'selected' ?>>
           <?=$creatif->getPseudo()?> 

@@ -85,7 +85,7 @@ abstract class ProjectsController
     }
 
     /**
-     * Ajout un projet à la base de données puis redirige vers la page d'acceuil
+     * Ajoute un projet à la base de données puis redirige vers la page d'acceuil
      *
      * @param array $data les données du projet
      * @param array $image l'image du projet
@@ -115,6 +115,12 @@ abstract class ProjectsController
         }
     }
 
+    /**
+     * Envoie sur le formulaire d'édition d'un projet
+     *
+     * @param integer $id ID du projet à éditer
+     * @return void
+     */
     public static function editAction(int $id) :void
     {
         $project = ProjectsRepository::findOneById($id); 
@@ -127,7 +133,15 @@ abstract class ProjectsController
         $content = ob_get_clean();
     }
 
-    public static function updateAction(int $id, array $data, array $image) :variant_mod
+    /**
+     * Modifie un projet puis redirige vers la page d'acceuil
+     *
+     * @param integer $id ID du projet à modifer
+     * @param array $data les nouvelles données du projet
+     * @param array $image la nouvelle image du projet
+     * @return variant_mod
+     */
+    public static function updateAction(int $id, array $data, array $image) :void
     {
         //ancienne image
         $Oldimage = ProjectsRepository::findOneById($id)->getImage();

@@ -8,6 +8,11 @@ abstract class App
 {
     private static $_connexion = null, $_public_root, $_root, $_authorizedImagesExtension, $_authorizedImagesType, $_maxImageSize;
 
+    /**
+     * Démarre une session et initialise les propriétés de l'App
+     *
+     * @return void
+     */
     public static function start(): void
     {
         session_start();
@@ -19,12 +24,21 @@ abstract class App
         SELF::setMaxImageSize();
     }
 
+    /**
+     * Ferme la connexion à la DB
+     *
+     * @return void
+     */
     public static function close(): void
     {
         SELF::$_connexion = null;
     }
 
+
+    //------------------------
     // GETTERS 
+    //------------------------
+    
     public static function getConnexion(): PDO
     {
         return SELF::$_connexion;
@@ -52,7 +66,11 @@ abstract class App
         return SELF::$_maxImageSize;
     }
 
+
+    //------------------------
     // SETTERS 
+    //------------------------
+
     private static function setConnexion(): void
     {
         try {
