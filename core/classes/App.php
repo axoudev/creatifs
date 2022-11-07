@@ -6,7 +6,7 @@ use \PDO, \PDOException;
 
 abstract class App
 {
-    private static $_connexion = null, $_public_root, $_root, $_authorizedImagesExtension, $_authorizedImagesType;
+    private static $_connexion = null, $_public_root, $_root, $_authorizedImagesExtension, $_authorizedImagesType, $_maxImageSize;
 
     public static function start(): void
     {
@@ -16,6 +16,7 @@ abstract class App
         SELF::setRoot();
         SELF::setAuthorizedImagesExtension();
         SELF::setAuthorizedImagesType();
+        SELF::setMaxImageSize();
     }
 
     public static function close(): void
@@ -46,6 +47,10 @@ abstract class App
     {
         return SELF::$_authorizedImagesType;
     }
+    public static function getMaxImageSize() :int
+    {
+        return SELF::$_maxImageSize;
+    }
 
     // SETTERS 
     private static function setConnexion(): void
@@ -75,6 +80,10 @@ abstract class App
     private static function setAuthorizedImagesType() :void
     {
         SELF::$_authorizedImagesType = ['image/png','image/jpg','image/jpeg','image/gif'];;
+    }
+    private static function setMaxImageSize() :void
+    {
+        SELF::$_maxImageSize = 10000000;
     }
 }
 ?>

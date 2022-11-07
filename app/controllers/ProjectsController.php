@@ -6,6 +6,8 @@ use \App\Models\Repositories\ProjectsRepository;
 use App\Models\Repositories\TagsRepository;
 use App\Models\Repositories\CreatifsRepository;
 
+use \Core\Classes\App;
+
 abstract class ProjectsController
 {
     /**
@@ -17,7 +19,7 @@ abstract class ProjectsController
     public static function indexAction(int $page = 1) :void
     {
         $projects = ProjectsRepository::findAll($page);
-        $total_nb_projects = ProjectsRepository::count($page);
+        $total_nb_projects = ProjectsRepository::count();
 
         global $content;
         ob_start();
@@ -83,7 +85,7 @@ abstract class ProjectsController
     }
 
     /**
-     * Ajout un pprojet à la base de données
+     * Ajout un projet à la base de données puis redirige vers la page d'acceuil
      *
      * @param array $data les données du projet
      * @param array $image l'image du projet
@@ -93,20 +95,15 @@ abstract class ProjectsController
     {
         if (!empty($image)){
 
-            // $AuthorizedExtensions = ['png', 'jpg', 'jpeg', 'gif'];
-            // $AuthorizedTypes = ['image/png','image/jpg','image/jpeg','image/gif'];
-
             $fileExtension = explode('.', $image['name']);
 
-            $maxSize = 10000000;
-
-            if(in_array($image['type'], \Core\Classes\App::getAuthorizedImagesType()))
+            if(in_array($image['type'], App::getAuthorizedImagesType()))
             {
                 //vérifie la faille de double extension (par exemple, "image.php.png") et vérifie que l'extension est autorisée
-                if(count($fileExtension)<=2 && in_array(strtolower(end($fileExtension)), \Core\Classes\App::getAuthorizedImagesExtension()))
+                if(count($fileExtension)<=2 && in_array(strtolower(end($fileExtension)), App::getAuthorizedImagesExtension()))
                 {
                     //vérifie que la taille ne dépasse pas la taille maximale et qu'il n'y à pas d'erreur
-                    if($image['size'] <= $maxSize && !$image['error'])
+                    if($image['size'] <= App::getMaxImageSize() && !$image['error'])
                     {
                         $newImgName = uniqid().'.'.\strtolower(end($fileExtension));
                         //vérifie qu'il n'y à pas eu d'erreur lors de l'upload
@@ -114,7 +111,7 @@ abstract class ProjectsController
                         {
                             //Tout s'est bien passé au niveau de l'image -> on insère les data dans la DB
                             $executed = ProjectsRepository::addOne($data, $newImgName);
-                            header('Location:'.\Core\Classes\App::getPublic_root());
+                            header('Location:'.App::getPublic_root());
 
                         }
                         else{

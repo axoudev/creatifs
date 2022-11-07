@@ -40,5 +40,9 @@ RewriteEngine on
     #URL: ?project=insert
     RewriteRule ^project\/add\/insert$ index.php?project=insert [L]
 
+    #MODIFIER UN PROJET (formulaire)
+    #PATTERN: /project/id/slug/edit/form
+    #URL: ?project=edit
+    RewriteRule ^project\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*\/edit\/form$ index.php?project=edit [L]
 #-----------------------------------
 RewriteCond %{REQUEST_URI} !\.(js|css|jpg|gif|zip|png|pdf)$ [NC]

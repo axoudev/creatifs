@@ -48,6 +48,11 @@ class Creatif{
         return $this->image;
     }
 
+    public function getNbProjects(): int
+    {
+        return \App\Models\Repositories\CreatifsRepository::findNbProjects($this->id);
+    }
+
     //-------------------------------
     // SETTERS
     //-------------------------------

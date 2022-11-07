@@ -24,9 +24,12 @@
         <div class="row">
         <div class="col-lg-12">
             <ul class="list-unstyled mb-0">
-            <li><a href="#">Mister Univ'Hair [4]</a></li>
-            <li><a href="#">Leerdam'Hair [12]</a></li>
-            <li><a href="#">Administra'Tifs [8]</a></li>
+                <?php 
+                    $cats = \App\Models\Repositories\CreatifsRepository::findAll();
+                    foreach($cats as $cat): 
+                ?>
+                    <li><a href="#"><?=$cat->getPseudo()?> [<?=$cat->getNbProjects()?>]</a></li>
+                <?php endforeach ?>
             </ul>
         </div>
         </div>

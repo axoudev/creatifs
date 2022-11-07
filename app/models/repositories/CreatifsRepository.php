@@ -54,4 +54,22 @@ abstract class CreatifsRepository
         
         return $obj;
     }
+
+    public static function findNbProjects(int $id, &$message = 'CreatifsRepository->findOneById: ')
+    {
+        try{
+            $sql = "SELECT count(p.id) 
+                    FROM creatifs c JOIN projets p ON c.id = p.creatif
+                    WHERE c.id = :id
+                    GROUP BY c.id;";
+            $rs = App::getConnexion()->prepare($sql);
+            $rs->bindValue(":id", $id, PDO::PARAM_INT);
+            $rs->execute();
+            $nb_projects = $rs->fetchColumn();
+        }catch(PDOException $e){
+            $message .= $e->getMessage()."<br>";
+        }
+        
+        return $nb_projects;
+    }
 }
