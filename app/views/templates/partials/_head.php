@@ -8,7 +8,7 @@
 
 <base href="<?=\Core\Classes\App::getPublic_root();?>">
 
-<title>CREA'TIFs - Design capill'Hair</title>
+<title>CREA'TIFs - <?=$title?></title>
 
 <!-- Bootstrap core CSS -->
 <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />

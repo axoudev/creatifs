@@ -21,6 +21,9 @@ abstract class ProjectsController
         $projects = ProjectsRepository::findAll($page);
         $total_nb_projects = ProjectsRepository::count();
 
+        global $title;
+        $title = 'Design capill\'Hair';
+
         global $content;
         ob_start();
         include '../app/views/projects/index.php';
@@ -37,6 +40,9 @@ abstract class ProjectsController
     {
         $project = ProjectsRepository::findOneById($projectId);
         $tags = TagsRepository::findAllByPost($projectId);
+
+        global $title;
+        $title = $project->getTitle();
 
         global $content;
         ob_start();
@@ -126,6 +132,9 @@ abstract class ProjectsController
         $project = ProjectsRepository::findOneById($id); 
         $projectCreatif = CreatifsRepository::findOneByProjectId($id);
         $creatifs = CreatifsRepository::findAll();
+
+        global $title;
+        $title = 'Modifier projet';
 
         global $content;
         ob_start();
