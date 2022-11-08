@@ -6,7 +6,7 @@ use \PDO, \PDOException;
 
 abstract class App
 {
-    private static $_connexion = null, $_public_root, $_root, $_authorizedImagesExtension, $_authorizedImagesType, $_maxImageSize;
+    private static $_connexion = null, $_public_root, $_authorizedImagesExtension, $_authorizedImagesType, $_maxImageSize;
 
     /**
      * Démarre une session et initialise les propriétés de l'App
@@ -18,7 +18,6 @@ abstract class App
         session_start();
         SELF::setConnexion();
         SELF::setPublic_root();
-        SELF::setRoot();
         SELF::setAuthorizedImagesExtension();
         SELF::setAuthorizedImagesType();
         SELF::setMaxImageSize();
@@ -39,28 +38,51 @@ abstract class App
     // GETTERS 
     //------------------------
     
+    /**
+     * Retourne la connexion à la db
+     *
+     * @return PDO connexion à la db
+     */
     public static function getConnexion(): PDO
     {
         return SELF::$_connexion;
     }
 
+    /**
+     * Retourne le chemin absolu du dossier public
+     *
+     * @return string chemin absolu du dossier public
+     */
     public static function getPublic_root(): string
     {
         return SELF::$_public_root;
     }
 
-    public static function getRoot(): string
-    {
-        return SELF::$_root;
-    }
+    /**
+     * Retourne les extensions d'images acceptées
+     *
+     * @return array tableau d'extensions d'image
+     */
     public static function getAuthorizedImagesExtension() :array
     {
         return SELF::$_authorizedImagesExtension;
     }
+
+    /**
+     * Retourne les types d'images acceptés
+     *
+     * @return array tableau de types d'images
+     */
     public static function getAuthorizedImagesType() :array
     {
         return SELF::$_authorizedImagesType;
     }
+
+    /**
+     * Retourne la taille maximale acceptée pour un image
+     *
+     * @return integer taille maximale d'une images
+     */
     public static function getMaxImageSize() :int
     {
         return SELF::$_maxImageSize;
@@ -71,6 +93,11 @@ abstract class App
     // SETTERS 
     //------------------------
 
+    /**
+     * Crée la connexion à la base de données
+     *
+     * @return void
+     */
     private static function setConnexion(): void
     {
         try {
@@ -80,25 +107,44 @@ abstract class App
             die();
         }
     }
+
+    /**
+     * instancie le chemin absolu du dossier public
+     *
+     * @return void
+     */
     private static function setPublic_root(): void
     {
         $tempURL = implode('/', explode('/', 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'], -2));
 
         SELF::$_public_root = $tempURL . '/public/';
     }
-    private static function setRoot() :void
-    {
-        SELF::$_root = implode('/', explode('/', 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'], -2)).'/';
-    }
 
+    /**
+     * instancie les extension autorisée pour les images
+     *
+     * @return void
+     */
     private static function setAuthorizedImagesExtension() :void
     {
         SELF::$_authorizedImagesExtension = ['png', 'jpg', 'jpeg', 'gif'];
     }
+
+    /**
+     * instancie les types autorisés pour les images
+     *
+     * @return void
+     */
     private static function setAuthorizedImagesType() :void
     {
         SELF::$_authorizedImagesType = ['image/png','image/jpg','image/jpeg','image/gif'];;
     }
+
+    /**
+     * instancie la taille maximale autorisée pour une image
+     *
+     * @return void
+     */
     private static function setMaxImageSize() :void
     {
         SELF::$_maxImageSize = 10000000;

@@ -24,6 +24,7 @@ abstract class TagsRepository
         
         return $obj;
     }
+
     /**
      * Trouve tout les tags correspondants à un post
      *
@@ -51,6 +52,13 @@ abstract class TagsRepository
         return $obj;
     }
 
+    /**
+     * Supprime les liens en entre le projets et les tags
+     *
+     * @param integer $projectId id du projet pour lequel on supprime les tags
+     * @param string $message
+     * @return void
+     */
     public static function removeLinkToProject(int $projectId, &$message = 'TagsRepository->removeLinkToProject: ')
     {
         try{
@@ -66,6 +74,14 @@ abstract class TagsRepository
         return $executed;
     }
     
+    /**
+     * Crée le lien entre un tag et un projet
+     *
+     * @param integer $projectId id du projet
+     * @param integer $tagId id du tag
+     * @param string $message
+     * @return void
+     */
     public static function addTagsToProject(int $projectId, int $tagId, &$message = 'TagsRepository->addTagsToProject: ')
     {
         try{
