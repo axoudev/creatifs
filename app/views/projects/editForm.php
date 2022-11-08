@@ -45,6 +45,21 @@
         <?php endforeach ?>
       </select>
     </div>
+    
+    <div class="form-group">
+      <label for="tags[]">Tags</label><br/>
+        <?php foreach($tags as $tag): ?>
+          
+          <input type="checkbox" name="tags[]" value="<?=$tag->getId()?>" 
+          <?php 
+           //verifier que le tag est lié au projet
+          ?>
+            > <label><?=$tag->getName()?></label><br/>
+        <?php endforeach ?>
+        <label>Add new tags (separate with <strong>;</strong>): </label>
+        <input type="text" name="newTag">
+    </div>
+
     <div>
       <input class="btn btn-primary" type="submit" value="submit" />
       <input class="btn btn-secondary" type="reset" value="reset" />

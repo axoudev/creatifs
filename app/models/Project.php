@@ -2,22 +2,13 @@
 
 namespace App\Models;
 
-class Project implements ClassTemplate{
-    private $id, $titre, $texte, $dateCreation, $image, $creatif;
+class Project extends \Core\Classes\Model{
+    private $titre, $texte, $dateCreation, $image, $creatif;
 
     //-------------------------------
     // GETTERS
     //-------------------------------
 
-    /**
-     * Retourne l'id du projet
-     *
-     * @return integer
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
     /**
      * Retourne le titre du projet
      *
@@ -64,23 +55,9 @@ class Project implements ClassTemplate{
         return $this->creatif;
     }
 
-
     //-------------------------------
     // SETTERS
     //-------------------------------
-
-    /**
-     * Modifie l'id du projet
-     *
-     * @param integer|null $data
-     * @return void
-     */
-    public function setId(int $data = null)
-    {
-        if ($data) :
-            $this->id = $data;
-        endif;
-    }
 
     /**
      * Modifie le titre du projet

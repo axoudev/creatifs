@@ -132,6 +132,8 @@ abstract class ProjectsController
         $project = ProjectsRepository::findOneById($id); 
         $projectCreatif = CreatifsRepository::findOneByProjectId($id);
         $creatifs = CreatifsRepository::findAll();
+        $tags = TagsRepository::findAll();
+        $projectTags = TagsRepository::findAllByPost($project->getId());
 
         global $title;
         $title = 'Modifier projet';
@@ -155,7 +157,6 @@ abstract class ProjectsController
         //ancienne image
         $Oldimage = ProjectsRepository::findOneById($id)->getImage();
 
-        var_dump($image['name']);
         //vérifie que l'image existe
         if (!empty($image) && $image['size'] > 0){
             //crée un nom pour l'image avec un id unique
@@ -172,8 +173,15 @@ abstract class ProjectsController
                         unlink('../public/assets/images/'.$Oldimage); 
                     }
 
-                    //Tout s'est bien passé au niveau de l'image -> on insère les data dans la DB
+                    //Tout s'est bien passé au niveau de l'image -> on commence les opérations dans la DB
+                    //Supprime les liens entre les tags et le projet
+                    TagsRepository::removeLinkToProject($id);
+                    //Modifie le projet
                     ProjectsRepository::editOne($id, $data, $newImgName);
+                    //Ajoute les tags au projet
+                    foreach($data['tags'] as $tag){
+                        Tags::addTagsToProject($id, (int)$tag);
+                    }
                 }
                 else{
                     echo 'Erreur lors de l\'upload...';
@@ -182,8 +190,17 @@ abstract class ProjectsController
             
         }else{
             //Pas de nouvelle image -> on reprend l'ancienne
+            TagsRepository::removeLinkToProject($id);
             ProjectsRepository::editOne($id, $data, $Oldimage);
+            if(isset($data['tags']))
+            {
+                foreach($data['tags'] as $tag){
+                    var_dump($id, (int)$tag);
+                    TagsRepository::addTagsToProject($id, (int)$tag);
+                }
+            }
+            
         }
-        header('Location:'.App::getPublic_root());
+        //header('Location:'.App::getPublic_root());
     }
 }

@@ -1,22 +1,11 @@
 <?php
 namespace App\Models;
-class Creatif implements ClassTemplate{
-    private $id, $pseudo, $bio, $image;
+class Creatif extends \Core\Classes\Model{
+    private $pseudo, $bio, $image;
 
     //-------------------------------
     // GETTERS
     //-------------------------------
-
-    /**
-     * Retourne l'id du créatif
-     *
-     * @return integer 
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
     /**
      * retourne le pseudo du créatif
      *
@@ -60,19 +49,6 @@ class Creatif implements ClassTemplate{
     //-------------------------------
     // SETTERS
     //-------------------------------
-    
-    /**
-     * Modifie l'id du créatif
-     *
-     * @param integer|null $data
-     * @return void
-     */
-    public function setId(int $data = null) :void
-    {
-        if ($data) :
-            $this->id = $data;
-        endif;
-    }
 
     /**
      * Modifie le pseudo du créatif
