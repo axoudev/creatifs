@@ -12,18 +12,21 @@ RewriteEngine on
 #-----------------------------------
 # ROUTES
 #-----------------------------------
-
 #ROUTE DES PAGES
     #PATTERN: page/id
     #URL: ?page=xx
     RewriteRule ^page\/([1-9][0-9]*)$ index.php?page=$1 [L]
 
 #ROUTE DES PROJETS
+    #AFFICHER TOUT LES PROJETS (page d'acceuil)
+    #PATTERN: projects
+    #URL: ?project
+    RewriteRule ^projects$ index.php?project [L]
 
     #AFFICHER LES DETAILS D'UN PROJET
     #PATTERN: project/id/slug
     #URL: ?project=xx
-    RewriteRule ^project\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*$ index.php?project=$1 [L]
+    RewriteRule ^project\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*$ index.php?project=show&id=$1 [L]
 
     #SUPPRIMER UN PROJET
     #PATTERN: project/delete/id/slug

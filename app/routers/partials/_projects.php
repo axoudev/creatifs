@@ -2,6 +2,11 @@
 use \App\Controllers\ProjectsController;
 
 switch($_GET['project']){
+    //Afficher un projet
+    case 'show':
+        ProjectsController::showAction((int)$_GET['id']);
+        break;
+
     //Supprimer projet
     case 'delete':
         ProjectsController::deleteAction((int)$_GET['id']);
@@ -29,6 +34,6 @@ switch($_GET['project']){
 
     //Afficher les projets
     default:
-        ProjectsController::showAction((int)$_GET['project']);
+        ProjectsController::indexAction();
 }
 ?>

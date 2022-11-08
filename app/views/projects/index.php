@@ -12,6 +12,7 @@
 use App\Models\Repositories\CreatifsRepository;
 use Core\Classes\Helpers;
 
+//Liste des projets
 foreach ($projects as $project): ?>
     <div class="row py-4">
         <div class="col-md-4">
@@ -46,6 +47,8 @@ foreach ($projects as $project): ?>
 
 <nav aria-label="Page navigation example">
     <ul class="pagination" style="justify-content: center">
+
+        <!-- BOUTTON PAGE PRECEDENTE -->
         <li class="page-item">
             <a class="page-link<?php 
                 if(isset($_GET['page'])){
@@ -58,6 +61,7 @@ foreach ($projects as $project): ?>
             ?>" href="page/<?php if(isset($_GET['page'])) echo $_GET['page']-1?>">Previous</a>
         </li>
 
+        <!-- NUMEROS DE PAGES -->
         <?php for($i = 0, $page_number = 1; $i < $total_nb_projects; $i+=10, $page_number++):?>
             <li class="page-item">
                 <a class="page-link<?php 
@@ -74,6 +78,8 @@ foreach ($projects as $project): ?>
             </li>
             <?php $lastPage = $page_number ?>
         <?php endfor; ?>
+
+        <!-- BOUTTON PAGE SUIVANTE -->
         <li class="page-item">
             <a class="page-link<?php 
                 if(isset($_GET['page'])){
