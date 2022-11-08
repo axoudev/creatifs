@@ -6,7 +6,7 @@ use \PDO, \PDOException;
 
 abstract class App
 {
-    private static $_connexion = null, $_public_root, $_authorizedImagesExtension, $_authorizedImagesType, $_maxImageSize;
+    private static $_connexion = null, $_public_root, $_slugMaxChars, $_authorizedImagesExtension, $_authorizedImagesType, $_maxImageSize;
 
     /**
      * Démarre une session et initialise les propriétés de l'App
@@ -21,6 +21,7 @@ abstract class App
         SELF::setAuthorizedImagesExtension();
         SELF::setAuthorizedImagesType();
         SELF::setMaxImageSize();
+        SELF::setSlugMaxchars();
     }
 
     /**
@@ -88,7 +89,15 @@ abstract class App
         return SELF::$_maxImageSize;
     }
 
-
+    /**
+     * Retourne le nombre maximum de caracteres pour un slug
+     *
+     * @return integer nombre macimal de caractères
+     */
+    public static function getSlugMaxChars() :int
+    {
+        return SELF::$_slugMaxChars;
+    }
     //------------------------
     // SETTERS 
     //------------------------
@@ -148,6 +157,16 @@ abstract class App
     private static function setMaxImageSize() :void
     {
         SELF::$_maxImageSize = 10000000;
+    }
+
+    /**
+     * instancie le nombre maximal de caractères dans un slug
+     *
+     * @return void
+     */
+    private static function setSlugMaxchars() :void
+    {
+        SELF:: $_slugMaxChars = 25;
     }
 }
 ?>

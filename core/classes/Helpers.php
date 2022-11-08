@@ -19,12 +19,23 @@ abstract class Helpers
     /**
      * Crée un slug à partir d'une chaine de caractère donnée
      *
-     * @param string $text chaine de caractère
+     * @param string $text chaine de caractère "slugifiée"
      * @return void
      */
     public static  function slugify(string $text)
     {
-        return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', str_replace(array('.','\'',',','!','?',';'),'',iconv('UTF-8','ASCII//TRANSLIT',$text)))));;
+        //Raccourci le slug à l'espace juste avant le nombre limite de caractères
+        $text = SELF::truncate($text, App::getSlugMaxChars());
+        //Remplace les caractères accentués par leur équivalent non-accentué
+        $text = iconv('UTF-8','ASCII//TRANSLIT', $text);
+        //Supprime les caractères spéciaux
+        $text = str_replace(array('.','\'',',','!','?',';'),'',$text);
+        //Remplace le espaces par des tirets
+        $text = preg_replace('/[^A-Za-z0-9-]+/', '-', $text);
+        //Met la chaine de caractères en minuscule
+        $text = strtolower($text);
+
+        return $text;
     }
 
     /**
@@ -47,5 +58,26 @@ abstract class Helpers
                 $image['size'] <= App::getMaxImageSize() && 
                 //vérifie qu'il n'y a pas d'erreur avec l'image
                 !$image['error'];
+    }
+    
+    /**
+     * Tronque une chaine de caractères à l'espace juste avant la limite de caractères
+     *
+     * @param string $string
+     * @param int $limit
+     * @return string chaine de caractère raccourcie au nombre de caractères limite
+     */
+    public static function truncate(string $string, int $limit)
+    {
+        $words = explode(' ', $string);
+        $tmpNbChars = 0;
+
+        foreach($words as $key=>$word){
+            $tmpNbChars += strlen($word);
+            if($tmpNbChars >= $limit){
+                $words = array_slice($words, 0, $key);
+            }
+        }
+        return implode(' ', $words);
     }
 }
