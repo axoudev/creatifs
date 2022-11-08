@@ -52,12 +52,14 @@
         
         <input type="checkbox" name="tags[]" value="<?=$tag->getId()?>" 
         <?php 
-          //verifier que le tag est lié au projet
+          foreach($projectTags as $projectTag){
+            if($tag->getId() == $projectTag->getId()){
+              echo 'checked';
+            }
+          }  
         ?>
           > <label><?=$tag->getName()?></label><br/>
       <?php endforeach ?>
-      <label>Add new tags (separate with <strong>;</strong>): </label>
-      <input type="text" name="newTag">
   </div>
 
   <div>

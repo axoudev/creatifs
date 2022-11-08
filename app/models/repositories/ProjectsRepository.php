@@ -143,12 +143,13 @@ abstract class ProjectsRepository
             $rs->bindValue(":texte", $data['text'], PDO::PARAM_STR);
             $rs->bindValue(":image", $imageName, PDO::PARAM_STR);
             $rs->bindValue(":creatif", (int)$data['creatif_id'], PDO::PARAM_INT);
-            $executed = $rs->execute();
+            $rs->execute();
+            $id = App::getConnexion()->lastInsertId();
         }catch(PDOException $e){
             $message .= $e->getMessage()."<br>";
         }
         
-        return $executed;
+        return $id;
     }
 
     /**

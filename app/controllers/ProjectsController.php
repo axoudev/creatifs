@@ -83,6 +83,7 @@ abstract class ProjectsController
     public static function addAction() :void
     {
         $creatifs = CreatifsRepository::findAll();
+        $tags = TagsRepository::findAll();
         
         global $content;
         ob_start();
@@ -102,14 +103,23 @@ abstract class ProjectsController
         //vérifie que l'image existe
         if (!empty($image)){
             //crée un nom pour l'image avec un id unique
-            $newImgName = uniqid().'.'.strtolower(end(explode('.', $image['name'])));
+            $tmp = explode('.', $image['name']);
+            $newImgName = uniqid().'.'.strtolower(end($tmp));
             //vérifie que l'image est valide
             if(\Core\Classes\Helpers::isValidImage($image)){
                 //vérifie qu'il n'y à pas eu d'erreur lors de l'upload
                 if(move_uploaded_file($image['tmp_name'], '../public/assets/images/'.$newImgName))
                 {
                     //Tout s'est bien passé au niveau de l'image -> on insère les data dans la DB
-                    ProjectsRepository::addOne($data, $newImgName);
+                    $projectId = ProjectsRepository::addOne($data, $newImgName);
+
+                    //Ajoute les tags au projet
+                    if(isset($data['tags']))
+                    {
+                        foreach($data['tags'] as $tag){
+                            TagsRepository::addTagsToProject($projectId, (int)$tag);
+                        }
+                    }
                     header('Location:'.App::getPublic_root());
 
                 }
@@ -173,15 +183,9 @@ abstract class ProjectsController
                         unlink('../public/assets/images/'.$Oldimage); 
                     }
 
-                    //Tout s'est bien passé au niveau de l'image -> on commence les opérations dans la DB
-                    //Supprime les liens entre les tags et le projet
-                    TagsRepository::removeLinkToProject($id);
-                    //Modifie le projet
+                    //Tout s'est bien passé au niveau de l'image -> on peut modifier le projet
                     ProjectsRepository::editOne($id, $data, $newImgName);
-                    //Ajoute les tags au projet
-                    foreach($data['tags'] as $tag){
-                        Tags::addTagsToProject($id, (int)$tag);
-                    }
+                    
                 }
                 else{
                     echo 'Erreur lors de l\'upload...';
@@ -190,17 +194,20 @@ abstract class ProjectsController
             
         }else{
             //Pas de nouvelle image -> on reprend l'ancienne
-            TagsRepository::removeLinkToProject($id);
             ProjectsRepository::editOne($id, $data, $Oldimage);
-            if(isset($data['tags']))
-            {
-                foreach($data['tags'] as $tag){
-                    var_dump($id, (int)$tag);
-                    TagsRepository::addTagsToProject($id, (int)$tag);
-                }
-            }
-            
         }
-        //header('Location:'.App::getPublic_root());
+
+        //Supprime les liens entre les tags et le projet
+        TagsRepository::removeLinkToProject($id);
+        //Ajoute les tags au projet
+        if(isset($data['tags']))
+        {
+            foreach($data['tags'] as $tag){
+                TagsRepository::addTagsToProject($id, (int)$tag);
+            }
+        }
+
+        //redirection vers la page d'acceuil
+        header('Location:'.App::getPublic_root());
     }
 }
