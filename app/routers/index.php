@@ -5,8 +5,11 @@ if(isset($_GET['projects'])){
 
 //Route par défaut
 }else{
+    //si un n° de page est mentionné
     if(isset($_GET['page'])){
         \App\Controllers\ProjectsController::indexAction($_GET['page']);   
+        
+    //sinon
     }else{
         \App\Controllers\ProjectsController::indexAction();
     }
