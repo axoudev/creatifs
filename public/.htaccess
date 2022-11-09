@@ -28,32 +28,32 @@ RewriteEngine on
     RewriteRule ^projects$ index.php?projects [L]
 
     #AFFICHER LES DETAILS D'UN PROJET
-    #PATTERN: project/id/slug
+    #PATTERN: projects/id/slug
     #URL: ?project=xx
     RewriteRule ^projects\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*$ index.php?projects=show&id=$1 [L]
 
     #SUPPRIMER UN PROJET
-    #PATTERN: project/delete/id/slug
+    #PATTERN: projects/delete/id/slug
     #URL: ?project=delete&id=xx
     RewriteRule ^projects\/delete\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*$ index.php?projects=delete&id=$1 [L]
 
     #AJOUTER UN PROJET (formulaire)
-    #PATTERN: project/add/form
+    #PATTERN: projects/add/form
     #URL: ?project=add
     RewriteRule ^projects\/add\/form$ index.php?projects=add [L]
 
     #AJOUTER UN PROJET (insertion)
-    #PATTERN: project/add/insert
+    #PATTERN: projects/add/insert
     #URL: ?project=insert
     RewriteRule ^projects\/add\/insert$ index.php?projects=insert [L]
 
     #MODIFIER UN PROJET (formulaire)
-    #PATTERN: /project/id/slug/edit/form
+    #PATTERN: /projects/id/slug/edit/form
     #URL: ?project=edit
     RewriteRule ^projects\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*\/edit\/form$ index.php?projects=edit&id=$1 [L]
 
     #MODIFIER UN PROJET (update)
-    #PATTERN: /project/id/slug/edit/update
+    #PATTERN: /projects/id/slug/edit/update
     #URL: ?project=update
     RewriteRule ^projects\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*\/edit\/update$ index.php?projects=update&id=$1 [L]
 
