@@ -8,7 +8,7 @@ use PDOException;
 abstract class TagsRepository
 {
 
-    public static function findAll(&$message = 'TagsRepository->findAll: ')
+    public static function findAll()
     {
         try{
             $sql = "SELECT *
@@ -32,7 +32,7 @@ abstract class TagsRepository
      * @param string $message
      * @return Tag[] $obj Tableau d'objets Tag
      */
-    public static function findAllByPost(int $projectId, &$message = 'TagsRepository->findAllByPost: ')
+    public static function findAllByPost(int $projectId)
     {
         try{
             $sql = "SELECT t.* 
@@ -59,7 +59,7 @@ abstract class TagsRepository
      * @param string $message
      * @return void
      */
-    public static function removeLinkToProject(int $projectId, &$message = 'TagsRepository->removeLinkToProject: ')
+    public static function removeLinkToProject(int $projectId)
     {
         try{
             $sql = "DELETE FROM projets_has_tags
@@ -82,7 +82,7 @@ abstract class TagsRepository
      * @param string $message
      * @return void
      */
-    public static function addTagsToProject(int $projectId, int $tagId, &$message = 'TagsRepository->addTagsToProject: ')
+    public static function addTagsToProject(int $projectId, int $tagId)
     {
         try{
             $sql = "INSERT INTO projets_has_tags

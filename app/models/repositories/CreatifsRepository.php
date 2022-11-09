@@ -14,7 +14,7 @@ abstract class CreatifsRepository
      * @param string $message
      * @return Creatif[] $obj un tableau d'objets Creatif
      */
-    public static function findAll(&$message = 'CreatifsRepository->findAll: ')
+    public static function findAll()
     {
         try{
             $sql = "SELECT * 
@@ -24,7 +24,7 @@ abstract class CreatifsRepository
             $rs->setFetchMode(PDO::FETCH_CLASS, '\App\Models\Creatif');
             $obj = $rs->fetchAll();
         }catch(PDOException $e){
-            $message .= $e->getMessage()."<br>";
+            return $e->getMessage()."<br>";
         }
         
         return $obj;
@@ -37,7 +37,7 @@ abstract class CreatifsRepository
      * @param string $message
      * @return Creatif $obj objet Creatif 
      */
-    public static function findOneById(int $id, &$message = 'CreatifsRepository->findOneById: ')
+    public static function findOneById(int $id)
     {
         try{
             $sql = "SELECT * 
@@ -49,7 +49,7 @@ abstract class CreatifsRepository
             $rs->setFetchMode(PDO::FETCH_CLASS, '\App\Models\Creatif');
             $obj = $rs->fetch();
         }catch(PDOException $e){
-            $message .= $e->getMessage()."<br>";
+            return $e->getMessage()."<br>";
         }
         
         return $obj;
@@ -62,7 +62,7 @@ abstract class CreatifsRepository
      * @param string $message 
      * @return void
      */
-    public static function findNbProjects(int $id, &$message = 'CreatifsRepository->findNbProjects: ')
+    public static function findNbProjects(int $id)
     {
         try{
             $sql = "SELECT count(p.id) 
@@ -74,7 +74,7 @@ abstract class CreatifsRepository
             $rs->execute();
             $nb_projects = $rs->fetchColumn();
         }catch(PDOException $e){
-            $message .= $e->getMessage()."<br>";
+            return $e->getMessage()."<br>";
         }
         
         return $nb_projects;
@@ -87,7 +87,7 @@ abstract class CreatifsRepository
      * @param string $message
      * @return void
      */
-    public static function findOneByProjectId(int $id, &$message = 'CreatifsRepository->findOneByProjectId: ')
+    public static function findOneByProjectId(int $id)
     {
         try{
             $sql = "SELECT c.* 
@@ -99,7 +99,7 @@ abstract class CreatifsRepository
             $rs->setFetchMode(PDO::FETCH_CLASS, '\App\Models\Creatif');
             $obj = $rs->fetch();
         }catch(PDOException $e){
-            $message .= $e->getMessage()."<br>";
+            return $e->getMessage()."<br>";
         }
         
         return $obj;

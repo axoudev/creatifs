@@ -14,7 +14,7 @@ abstract class ProjectsRepository
      * @param string $message
      * @return Project[] $obj Tableau d'objets Projects
      */
-    public static function findAll(int $page, &$message = 'ProjectsRepository->findAll: ')
+    public static function findAll(int $page)
     {
         $low_limit = ($page*10)-10;
         try{
@@ -39,7 +39,7 @@ abstract class ProjectsRepository
      * @param string $message
      * @return integer $nb_projects nombre de projets existants
      */
-    public static function count(&$message = 'ProjectsRepository->count: ')
+    public static function count()
     {
         try{
             $sql = "SELECT COUNT(id) 
@@ -61,7 +61,7 @@ abstract class ProjectsRepository
      * @param string $message
      * @return Project $obj objet Project correspondant à l'ID envoyé
      */
-    public static function findOneById(int $id, &$message = 'ProjectsRepository->findOneById: ')
+    public static function findOneById(int $id)
     {
         try{
             $sql = "SELECT * 
@@ -86,7 +86,7 @@ abstract class ProjectsRepository
      * @param string $message
      * @return void
      */
-    private static function deleteProjectLinkToTag(int $projectId, &$message = 'ProjectsRepository->deleteProjectLinkToTag: ')
+    private static function deleteProjectLinkToTag(int $projectId)
     {
         try{
             $sql = "DELETE FROM projets_has_tags
@@ -108,7 +108,7 @@ abstract class ProjectsRepository
      * @param string $message
      * @return void
      */
-    public static function deleteOneById(int $id, &$message = 'ProjectsRepository->deleteOneById: ')
+    public static function deleteOneById(int $id)
     {
         SELF::deleteProjectLinkToTag($id);
         try{
@@ -131,7 +131,7 @@ abstract class ProjectsRepository
      * @param string $imageName le nom de l'image
      * @return void
      */
-    public static function addOne(array $data, string $imageName, &$message = 'ProjectsRepository->addOne: '){
+    public static function addOne(array $data, string $imageName){
         try{
             $sql = "INSERT INTO projets
                     SET titre = :titre,
@@ -160,7 +160,7 @@ abstract class ProjectsRepository
      * @param string $imageName Nouvelle image du projet
      * @return void
      */
-    public static function editOne(int $id, array $data, string $imageName, &$message = 'ProjectsRepository->editOne: '){
+    public static function editOne(int $id, array $data, string $imageName){
         try{
             $sql = "UPDATE projets
                     SET titre = :titre,
