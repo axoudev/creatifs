@@ -12,8 +12,8 @@ use Core\Classes\Helpers;
 </p>
 
 <div>
-    <a href="project/<?=$project->getId()?>/<?=Helpers::slugify($project->getTitle())?>/edit/form" class="btn btn-primary">Éditer le projet</a>
-    <a href="project/delete/<?=$project->getId()?>/<?=\Core\Classes\Helpers::slugify($project->getTitle())?>" class="btn">Supprimer le projet</a>
+    <a href="projects/<?=$project->getId()?>/<?=Helpers::slugify($project->getTitle())?>/edit/form" class="btn btn-primary">Éditer le projet</a>
+    <a href="projects/delete/<?=$project->getId()?>/<?=\Core\Classes\Helpers::slugify($project->getTitle())?>" class="btn">Supprimer le projet</a>
 </div>
 <hr />
 

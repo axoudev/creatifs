@@ -3,7 +3,7 @@
 <!-- Title -->
 <h1 class="mt-4">Les projets <small>Design capill'Hair</small></h1>
 <div>
-    <a href="project/add/form" class="btn btn-primary">Add a project</a>
+    <a href="projects/add/form" class="btn btn-primary">Add a project</a>
 </div>
 
 <hr />
@@ -17,7 +17,7 @@ foreach ($projects as $project): ?>
     <div class="row py-4">
         <div class="col-md-4">
             <!-- lien vers les détails du projet -->
-            <a href="project/<?=$project->getId()?>/<?=Helpers::slugify($project->getTitle())?>"> 
+            <a href="projects/<?=$project->getId()?>/<?=Helpers::slugify($project->getTitle())?>"> 
                 <!-- image du projet -->
                 <img
                     class="img-fluid rounded mb-3 mb-md-0"
@@ -37,7 +37,7 @@ foreach ($projects as $project): ?>
                 <!-- Description du projet tronquée à 100 charactères -->
                 <?=Helpers::truncate($project->getText(), 100).'...'?>
             </p>
-            <a class="btn btn-primary" href="project/<?=$project->getId()?>/<?=Helpers::slugify($project->getTitle())?>">View Details</a>
+            <a class="btn btn-primary" href="projects/<?=$project->getId()?>/<?=Helpers::slugify($project->getTitle())?>">View Details</a>
         </div>
     </div>
 

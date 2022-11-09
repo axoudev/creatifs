@@ -1,6 +1,6 @@
 <?php
 //Si un projet est mentionné
-if(isset($_GET['project'])){
+if(isset($_GET['projects'])){
     require_once '../app/routers/partials/_projects.php';
 
 //Si un n° de page est mentioné

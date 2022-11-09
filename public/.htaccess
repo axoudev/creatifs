@@ -25,37 +25,37 @@ RewriteEngine on
     #AFFICHER TOUT LES PROJETS (page d'acceuil)
     #PATTERN: projects
     #URL: ?project
-    RewriteRule ^projects$ index.php?project [L]
+    RewriteRule ^projects$ index.php?projects [L]
 
     #AFFICHER LES DETAILS D'UN PROJET
     #PATTERN: project/id/slug
     #URL: ?project=xx
-    RewriteRule ^project\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*$ index.php?project=show&id=$1 [L]
+    RewriteRule ^projects\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*$ index.php?projects=show&id=$1 [L]
 
     #SUPPRIMER UN PROJET
     #PATTERN: project/delete/id/slug
     #URL: ?project=delete&id=xx
-    RewriteRule ^project\/delete\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*$ index.php?project=delete&id=$1 [L]
+    RewriteRule ^projects\/delete\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*$ index.php?projects=delete&id=$1 [L]
 
     #AJOUTER UN PROJET (formulaire)
     #PATTERN: project/add/form
     #URL: ?project=add
-    RewriteRule ^project\/add\/form$ index.php?project=add [L]
+    RewriteRule ^projects\/add\/form$ index.php?projects=add [L]
 
     #AJOUTER UN PROJET (insertion)
     #PATTERN: project/add/insert
     #URL: ?project=insert
-    RewriteRule ^project\/add\/insert$ index.php?project=insert [L]
+    RewriteRule ^projects\/add\/insert$ index.php?projects=insert [L]
 
     #MODIFIER UN PROJET (formulaire)
     #PATTERN: /project/id/slug/edit/form
     #URL: ?project=edit
-    RewriteRule ^project\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*\/edit\/form$ index.php?project=edit&id=$1 [L]
+    RewriteRule ^projects\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*\/edit\/form$ index.php?projects=edit&id=$1 [L]
 
     #MODIFIER UN PROJET (update)
     #PATTERN: /project/id/slug/edit/update
     #URL: ?project=update
-    RewriteRule ^project\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*\/edit\/update$ index.php?project=update&id=$1 [L]
+    RewriteRule ^projects\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*\/edit\/update$ index.php?projects=update&id=$1 [L]
 
 #-----------------------------------
 RewriteCond %{REQUEST_URI} !\.(js|css|jpg|gif|zip|png|pdf)$ [NC]

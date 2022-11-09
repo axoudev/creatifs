@@ -1,7 +1,7 @@
 <?php
 use \App\Controllers\ProjectsController;
 
-switch($_GET['project']){
+switch($_GET['projects']){
     //Afficher un projet
     case 'show':
         ProjectsController::showAction((int)$_GET['id']);

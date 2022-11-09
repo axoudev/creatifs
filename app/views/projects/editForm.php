@@ -3,7 +3,7 @@
 <h1>Edit a project</h1>
 
 <!-- Form Start -->
-<form action="project/<?=$project->getId()?>/<?=\Core\Classes\Helpers::slugify($project->getTitle())?>/edit/update" method="post" enctype="multipart/form-data">
+<form action="projects/<?=$project->getId()?>/<?=\Core\Classes\Helpers::slugify($project->getTitle())?>/edit/update" method="post" enctype="multipart/form-data">
   <div class="form-group">
     <label for="title">Title</label>
     <input

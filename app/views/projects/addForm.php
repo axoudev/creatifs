@@ -2,7 +2,7 @@
 <h1>Add a project</h1>
 
 <!-- Form Start -->
-<form action="project/add/insert" method="post" enctype="multipart/form-data">
+<form action="projects/add/insert" method="post" enctype="multipart/form-data">
   <div class="form-group">
     <label for="title">Title</label>
     <input
