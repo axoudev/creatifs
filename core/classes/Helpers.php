@@ -29,7 +29,7 @@ abstract class Helpers
         //Remplace les caractères accentués par leur équivalent non-accentué
         $text = iconv('UTF-8','ASCII//TRANSLIT', $text);
         //Supprime les caractères spéciaux
-        $text = str_replace(array('.','\'',',','!','?',';'),'',$text);
+        $text = str_replace(App::getSpecialChars(),'',$text);
         //Remplace le espaces par des tirets
         $text = preg_replace('/[^A-Za-z0-9-]+/', '-', $text);
         //Met la chaine de caractères en minuscule

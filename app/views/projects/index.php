@@ -35,7 +35,7 @@ foreach ($projects as $project): ?>
             </p>
             <p>
                 <!-- Description du projet tronquée à 100 charactères -->
-                <?=mb_strimwidth($project->getText(), 0, 100, "...");?>
+                <?=Helpers::truncate($project->getText(), 100).'...'?>
             </p>
             <a class="btn btn-primary" href="project/<?=$project->getId()?>/<?=Helpers::slugify($project->getTitle())?>">View Details</a>
         </div>

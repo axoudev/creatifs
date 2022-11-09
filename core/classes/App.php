@@ -6,7 +6,7 @@ use \PDO, \PDOException;
 
 abstract class App
 {
-    private static $_connexion = null, $_public_root, $_slugMaxChars, $_authorizedImagesExtension, $_authorizedImagesType, $_maxImageSize;
+    private static $_connexion = null, $_specialChars, $_public_root, $_slugMaxChars, $_authorizedImagesExtension, $_authorizedImagesType, $_maxImageSize;
 
     /**
      * Démarre une session et initialise les propriétés de l'App
@@ -22,6 +22,7 @@ abstract class App
         SELF::setAuthorizedImagesType();
         SELF::setMaxImageSize();
         SELF::setSlugMaxchars();
+        SELF::setSpecialChars();
     }
 
     /**
@@ -98,6 +99,16 @@ abstract class App
     {
         return SELF::$_slugMaxChars;
     }
+
+    /**
+     * Retourne un tableau contenant tout les caractères spéciaux
+     *
+     * @return array
+     */
+    public static function getSpecialChars() :array
+    {
+        return SELF::$_specialChars;
+    }
     //------------------------
     // SETTERS 
     //------------------------
@@ -167,6 +178,17 @@ abstract class App
     private static function setSlugMaxchars() :void
     {
         SELF:: $_slugMaxChars = 25;
+    }
+
+    private static function setSpecialChars() :void
+    {
+        SELF::$_specialChars = 
+        array(
+            '/','[','\\','\'','^','£','$','%',
+            '&','*','(',')','}','{','@','#','~',
+            '?','>','<','>',',','|','=','_',
+            '+','¬','-',']','/','.'
+        );
     }
 }
 ?>
