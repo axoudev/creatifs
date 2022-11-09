@@ -17,6 +17,10 @@ RewriteEngine on
     #URL: ?page=xx
     RewriteRule ^page\/([1-9][0-9]*)$ index.php?page=$1 [L]
 
+    #PATTERN: projects/page/id
+    #URL: ?page=xx
+    RewriteRule ^projects\/page\/([1-9][0-9]*)$ index.php?page=$1 [L]
+
 #ROUTE DES PROJETS
     #AFFICHER TOUT LES PROJETS (page d'acceuil)
     #PATTERN: projects
