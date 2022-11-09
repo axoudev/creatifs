@@ -3,12 +3,12 @@
 if(isset($_GET['projects'])){
     require_once '../app/routers/partials/_projects.php';
 
-//Si un n° de page est mentioné
-}elseif(isset($_GET['page'])){
-    \App\Controllers\ProjectsController::indexAction($_GET['page']); 
-
 //Route par défaut
 }else{
-    \App\Controllers\ProjectsController::indexAction();
+    if(isset($_GET['page'])){
+        \App\Controllers\ProjectsController::indexAction($_GET['page']);   
+    }else{
+        \App\Controllers\ProjectsController::indexAction();
+    }
 }
 ?>
