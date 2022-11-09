@@ -51,10 +51,14 @@ foreach ($projects as $project): ?>
         <!-- BOUTTON PAGE PRECEDENTE -->
         <li class="page-item">
             <a class="page-link<?php 
+
+                //si la variable page existe et qu'on est sur la première page -> désactive le bouton PREVIOUS
                 if(isset($_GET['page'])){
                     if($_GET['page']==1){
                         echo' disabled';
                     }
+
+                //si la variable page n'existe pas, on est forcément sur la première page -> désactive le bouton PREVIOUS
                 }else{
                     echo' disabled';
                 }
@@ -65,10 +69,14 @@ foreach ($projects as $project): ?>
         <?php for($i = 0, $page_number = 1; $i < $total_nb_projects; $i+=10, $page_number++):?>
             <li class="page-item">
                 <a class="page-link<?php 
+
+                //si la varibale page existe et que le numero de page est la page sur laquelle on est -> ajoutte la classe current
                 if(isset($_GET['page'])){
                     if($_GET['page']==$page_number){
                         echo' current';
                     }
+            
+                //si la variable page n'existe pas, on est forcément sur la page 1 -> ajoute la classe current au lien page 1
                 }else{
                     if($page_number==1){
                         echo' current';
@@ -76,12 +84,14 @@ foreach ($projects as $project): ?>
                 }
             ?>" href="page/<?=$page_number?>"><?=$page_number?></a>
             </li>
+
             <?php $lastPage = $page_number ?>
         <?php endfor; ?>
 
         <!-- BOUTTON PAGE SUIVANTE -->
         <li class="page-item">
             <a class="page-link<?php 
+                //si la page sur laquelle on se trouve est la dernière page -> désactive le bouton NEXT
                 if(isset($_GET['page'])){
                     if($_GET['page']==$lastPage){
                         echo' disabled';

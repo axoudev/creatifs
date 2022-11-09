@@ -48,11 +48,12 @@
   
   <div class="form-group">
     <label for="tags[]">Tags</label><br/>
+      <!-- Affiche les tags existants et coche ceux qui sont liés au projet -->
       <?php foreach($tags as $tag): ?>
-        
         <input type="checkbox" name="tags[]" value="<?=$tag->getId()?>" 
         <?php 
           foreach($projectTags as $projectTag){
+            //Si le tag est lié au projet -> on le coche
             if($tag->getId() == $projectTag->getId()){
               echo 'checked';
             }

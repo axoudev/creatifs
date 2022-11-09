@@ -17,7 +17,6 @@ use Core\Classes\Helpers;
 </div>
 <hr />
 
-<!-- Project One -->
 <div class="row">
     <div class="col-md-6">
         <a href="#">

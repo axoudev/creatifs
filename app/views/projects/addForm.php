@@ -44,8 +44,8 @@
   </div>
   <div class="form-group">
     <label for="tags[]">Tags</label><br/>
+      <!-- Liste des tags existants dans la DB -->
       <?php foreach($tags as $tag): ?>
-        
         <input type="checkbox" name="tags[]" value="<?=$tag->getId()?>"> <label><?=$tag->getName()?></label><br/>
       <?php endforeach ?>
   </div>
